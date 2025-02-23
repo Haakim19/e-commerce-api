@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('status');
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();
-            $table->timestamps();
         });
     }
 

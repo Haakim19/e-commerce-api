@@ -20,7 +20,6 @@ return new class extends Migration
             $table->dateTime('updated_at')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('product_id')->references('id')->on('products');
-            $table->timestamps();
         });
     }
 

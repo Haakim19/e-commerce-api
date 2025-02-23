@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name'); // name of the categorie
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();
-            $table->timestamps();
         });
     }
 

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('procucts', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('category_id');
             $table->string('name');
@@ -21,7 +21,6 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();
-            $table->timestamps();
         });
     }
 
