@@ -33,21 +33,6 @@ class OrderFactory extends Factory
             'user_id' => User::factory(),
             'total_amount' => $this->faker->numberBetween(10, 200000),
             'status' => $this->faker->randomElement($orderStatuses),
-            'shipping_address' => function (array $attributes) {
-                $user = User::find($attributes['user_id']);
-                $address = $user->addresses()->inRandomOrder()->first();
-
-                // Format as a string
-                return sprintf(
-                    "%s, %s, %s %s",
-                    $address->street,
-                    $address->city,
-                    $address->state,
-                    $address->postal_code
-                );
-            },
-            'created_at' => $this->faker->dateTimeBetween('now', '+1 month'),
-            'updated_at' => $this->faker->dateTimeBetween('+1 month', '+2 months'),
 
         ];
     }

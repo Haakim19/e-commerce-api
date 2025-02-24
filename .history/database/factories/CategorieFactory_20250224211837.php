@@ -33,9 +33,7 @@ class CategorieFactory extends Factory
         $randomCategory = $this->faker->randomElement($categories);
 
         return [
-            'name' => $this->faker->$randomCategory,
-            'created_at' => $this->faker->dateTimeBetween('now', '+1 month'),
-            'updated_at' => $this->faker->dateTimeBetween('+1 month', '+2 months'),
+            'name' => $this->faker->name(),
 
         ];
     }

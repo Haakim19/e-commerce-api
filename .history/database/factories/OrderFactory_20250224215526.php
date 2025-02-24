@@ -46,8 +46,6 @@ class OrderFactory extends Factory
                     $address->postal_code
                 );
             },
-            'created_at' => $this->faker->dateTimeBetween('now', '+1 month'),
-            'updated_at' => $this->faker->dateTimeBetween('+1 month', '+2 months'),
 
         ];
     }
