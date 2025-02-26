@@ -18,11 +18,7 @@ class AddressFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => function () {
-                // get a random user if not create a new one
-                return User::inRandomOrder()->first()->id ?? User::factory()->create()->id;
-            },
-
+            'user_id' => User::inRandomOrder()->first()->id ?? User::factory()->create()->id,
             'address_line_01' => $this->faker->streetAddress(),
             'address_line_02' => $this->faker->optional()->secondaryAddress(),
             'city' => $this->faker->city(),

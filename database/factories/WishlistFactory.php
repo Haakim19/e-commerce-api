@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,10 @@ class WishlistFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => User::inRandomOrder()->first()->id ?? User::factory()->create()->id,
+            'product_id' => Product::inRandomOrder()->first()->id ?? Product::factory()->create()->id,
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

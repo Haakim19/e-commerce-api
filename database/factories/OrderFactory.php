@@ -30,7 +30,7 @@ class OrderFactory extends Factory
             'Returned'
         ];
         return [
-            'user_id' => User::factory(),
+            'user_id' => User::inRandomOrder()->first()->id ?? User::factory()->create()->id,
             'total_amount' => $this->faker->numberBetween(10, 200000),
             'status' => $this->faker->randomElement($orderStatuses),
             'shipping_address' => function (array $attributes) {
@@ -39,11 +39,13 @@ class OrderFactory extends Factory
 
                 // Format as a string
                 return sprintf(
-                    "%s, %s, %s %s",
-                    $address->street,
+                    "%s, %s, %s %s,%s,%s",
+                    $address->address_line_01,
+                    $address->address_line_02,
                     $address->city,
                     $address->state,
-                    $address->postal_code
+                    $address->postal_code,
+                    $address->country
                 );
             },
             'created_at' => $this->faker->dateTimeBetween('now', '+1 month'),

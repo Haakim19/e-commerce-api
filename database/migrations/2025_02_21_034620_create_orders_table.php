@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('shipping_address');
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
