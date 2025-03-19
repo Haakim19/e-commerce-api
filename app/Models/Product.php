@@ -13,7 +13,7 @@ class Product extends Model
 
     public function categories()
     {
-        return $this->belongsTo(Categories::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function shoppingCart()
@@ -28,7 +28,7 @@ class Product extends Model
 
     public function reviews()
     {
-        return $this->hasMany(Reviews::class);
+        return $this->hasMany(Review::class);
     }
 
     public function wishlist()

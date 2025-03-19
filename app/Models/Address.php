@@ -7,13 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Categories extends Model
+class Address extends Model
 {
-
     use HasFactory, HasApiTokens, Notifiable;
 
-    public function products()
+    public function user()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(User::class);
     }
 }

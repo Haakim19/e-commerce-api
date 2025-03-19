@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Orders;
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -34,7 +34,7 @@ class PaymentFactory extends Factory
 
 
         return [
-            'order_id' => Orders::inRandomOrder()->first()->id ?? Orders::factory(),
+            'order_id' => Order::inRandomOrder()->first()->id ?? Order::factory(),
             'amount' => $this->faker->numberBetween(100, 20000),
             'payment_method' => $this->faker->randomElement($paymentMethod),
             'status' => $this->faker->randomElement($paymentStatus),

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Categories;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -27,7 +28,7 @@ class ProductFactory extends Factory
         $productName = $this->faker->randomElement(array_keys($products));
 
         return [
-            'category_id' => Categories::inRandomOrder()->first()->id ?? Categories::factory(),
+            'category_id' => Category::inRandomOrder()->first()->id ?? Category::factory(),
             'name' => $productName,
             'description' => $products[$productName] ?? 'No description available.',
             'price' => $this->faker->numberBetween(100, 2000),

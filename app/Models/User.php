@@ -54,12 +54,12 @@ class User extends Authenticatable
 
     public function order()
     {
-        return $this->hasMany(Orders::class);
+        return $this->hasMany(Order::class);
     }
 
     public function review()
     {
-        return $this->hasMany(Reviews::class);
+        return $this->hasMany(Review::class);
     }
 
     public function wishlist()
@@ -67,8 +67,8 @@ class User extends Authenticatable
         return $this->hasMany(Wishlist::class);
     }
 
-    public function address()
+    public function addresses()
     {
-        return $this->hasMany(Addresses::class);
+        return $this->hasMany(Address::class);
     }
 }

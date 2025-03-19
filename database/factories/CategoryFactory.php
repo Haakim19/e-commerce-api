@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Categories>
  */
-class CategorieFactory extends Factory
+class CategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -29,11 +29,8 @@ class CategorieFactory extends Factory
             'Grocery & Gourmet Food'
         ];
 
-        // Generate a random category
-        $randomCategory = $this->faker->randomElement($categories);
-
         return [
-            'name' => $this->faker->$randomCategory,
+            'name' => $this->faker->randomElement($categories),
             'created_at' => $this->faker->dateTimeBetween('now', '+1 month'),
             'updated_at' => $this->faker->dateTimeBetween('+1 month', '+2 months'),
 
