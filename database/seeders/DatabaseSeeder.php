@@ -25,5 +25,9 @@ class DatabaseSeeder extends Seeder
             PaymentSeeder::class,
             ReviewSeeder::class,
         ]);
+        // User::factory()->create([
+        //     'email' => 'test@example.com',
+        //     'password' => 'password123'
+        // ]);
     }
 }
