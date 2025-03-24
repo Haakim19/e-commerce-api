@@ -39,4 +39,24 @@ class AuthController extends Controller
             'message' => 'User Logged out successfully'
         ]);
     }
+    public function register(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+        ]);
+
+        return response()->json([
+            'message' => 'User registered successfully',
+            'usre' => $user,
+            'token' => $user->createToken('api-token')->plainTextToken,
+        ])->setStatusCode(201, 'User Created Successfully');
+    }
 }
