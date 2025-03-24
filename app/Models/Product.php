@@ -11,6 +11,8 @@ class Product extends Model
 {
     use HasFactory, HasApiTokens, Notifiable;
 
+    protected $fillable = ['name', 'price', 'description', 'stock'];
+
     public function categories()
     {
         return $this->belongsTo(Category::class);
