@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
         // Create 4 admins
         User::factory(4)->create([
             'role' => 'admin',
+            'password' => bcrypt('admin123')
         ]);
 
         User::factory(20)->create();
