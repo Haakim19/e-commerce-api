@@ -16,12 +16,34 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user = Auth::user();
-        // Check if the user is logged in and has admin or super admin role
-        if ($user && ($user->role === 'admin' || $user->role === 'super_admin')) {
-            return $next($request);
+        // Check if user is authenticated
+        if (!Auth::check()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Authentication required'
+            ], 401);
         }
-        // Return unauthorized responce
-        return response()->json(['message' => 'unauthorized'], 403);
+
+        $user = Auth::user();
+
+        // Check if user has required role and token abilities
+        if (!in_array($user->role, ['admin', 'super admin'])) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Access denied. Admin privileges required.',
+                'user_role' => $user->role
+            ], 403);
+        }
+
+        // Check token abilities
+        if (!$request->user()->tokenCan('admin')) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Invalid token permissions',
+                'required_ability' => 'admin'
+            ], 403);
+        }
+
+        return $next($request);
     }
 }

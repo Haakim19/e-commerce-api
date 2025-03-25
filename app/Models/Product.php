@@ -11,7 +11,14 @@ class Product extends Model
 {
     use HasFactory, HasApiTokens, Notifiable;
 
-    protected $fillable = ['name', 'price', 'description', 'stock'];
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+        'stock',
+        'category_id',
+        'user_id'
+    ];
 
     public function categories()
     {

@@ -22,5 +22,5 @@ Route::apiResource('products', ProductController::class)
 
 // Protected Endpoints
 Route::apiResource('products', ProductController::class)
-    ->only(['update', 'destroy', 'create', 'store'])
+    ->only(['update', 'destroy', 'store'])
     ->middleware(['auth:sanctum', AdminMiddleware::class]);
