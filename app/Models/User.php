@@ -52,17 +52,17 @@ class User extends Authenticatable
         return $this->hasMany(ShoppingCart::class);
     }
 
-    public function order()
+    public function orders()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class)->latest();
     }
 
-    public function review()
+    public function reviews()
     {
         return $this->hasMany(Review::class);
     }
 
-    public function wishlist()
+    public function wishlists()
     {
         return $this->hasMany(Wishlist::class);
     }
