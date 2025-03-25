@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,9 +16,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $paginatedProducts = Product::paginate(15);
-
-        return response()->json($paginatedProducts, 200);
+        $paginatedProducts = Product::with('category')->paginate(15);
+        return ProductResource::collection($paginatedProducts);
     }
 
     /**

@@ -12,6 +12,9 @@ class Category extends Model
 
     use HasFactory, HasApiTokens, Notifiable;
 
+    protected $fillable = [
+        'name',
+    ];
     public function products()
     {
         return $this->hasMany(Product::class);
