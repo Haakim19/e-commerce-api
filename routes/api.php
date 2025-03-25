@@ -11,29 +11,42 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-// Public Routes
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/logout', [AuthController::class, 'logout'])
-    ->middleware('auth:sanctum');
+//! Auth Routes
+Route::controller(AuthController::class)->group(function () {
+    // Public Routes
+    Route::post('/login', 'login');
+    Route::post('/register', 'register');
 
-// Public Endpoints
-Route::apiResource('products', ProductController::class)
-    ->only(['index', 'show']);
+    // Protected Routes
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('/logout', 'logout');
+        Route::get('/user', function (Request $request) {
+            return $request->user();
+        });
+    });
+});
 
-// Protected Endpoints
-Route::apiResource('products', ProductController::class)
-    ->only(['update', 'destroy', 'store'])
-    ->middleware(['auth:sanctum', AdminMiddleware::class]);
+//! Product Routes
+Route::prefix('products')->group(function () {
+    // Public Routes
+    Route::get('/', [ProductController::class, 'index']);
+    Route::get('/{product}', [ProductController::class, 'show']);
 
-// Place the specific route first
-Route::get(
-    '/customers/all-orders',
-    [CustomerController::class, 'getAllCustomerOrders']
-);
-Route::get(
-    '/customers/{userId}/orders',
-    [CustomerController::class, 'getCustomerOrders']
-);
-Route::apiResource('customers', CustomerController::class)
-    ->only(['index', 'show']);
+    // Protected Admin Routes
+    Route::middleware(['auth:sanctum', AdminMiddleware::class])->group(function () {
+        Route::post('/', [ProductController::class, 'store']);
+        Route::put('/{product}', [ProductController::class, 'update']);
+        Route::delete('/{product}', [ProductController::class, 'destroy']);
+    });
+});
+
+//! Customer Routes
+Route::prefix('customers')->group(function () {
+    // Regular customer routes
+    Route::get('/', [CustomerController::class, 'index']);
+    Route::get('/{id}', [CustomerController::class, 'show']);
+
+    // Customer order routes
+    Route::get('/all-orders', [CustomerController::class, 'getAllCustomerOrders']);
+    Route::get('/{userId}/orders', [CustomerController::class, 'getCustomerOrders']);
+});
